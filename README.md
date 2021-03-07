@@ -1,6 +1,6 @@
 # web-grep
 
-![GitHub](https://img.shields.io/github/license/sohomdatta1/web-grep?style=for-the-badge)
+![GitHub](https://img.shields.io/github/license/sohomdatta1/web-grep?style=flat-square) ![GitHub last commit](https://img.shields.io/github/last-commit/sohomdatta1/web-grep?style=flat-square) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/sohomdatta1/web-grep?style=flat-square) ![Uses Node](https://aleen42.github.io/badges/src/node_flat_square_dfc.svg) ![Uses Eslint](https://aleen42.github.io/badges/src/eslint_flat_square_dfc.svg)
 
 Code search/browsing website built using NodeJS. Inspired by [codesearch.wmcloud.org](https://codesearch.wmcloud.org) and [github1s.com](https://github1s.com) (to a certain extent).
 

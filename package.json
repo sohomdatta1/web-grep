@@ -30,7 +30,6 @@
 		"is-url": "^1.2.4",
 		"mongoose": "^5.11.19",
 		"morgan": "~1.9.1",
-		"nodegit": "^0.27.0",
 		"nodemon": "^2.0.7",
 		"simple-git": "^2.36.0"
 	},
