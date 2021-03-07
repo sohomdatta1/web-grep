@@ -1,0 +1,43 @@
+{
+	"name": "web-grep-server",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"start": "npm run start:dev",
+		"start:dev": "npm run start:ui & npm run start:server",
+		"start:server": "nodemon ./bin/www",
+		"start:prod": "cd ui/ && npm run build && cd - && node ./bin/www",
+		"start:ui": "cd ui/ && npm run start",
+		"build": "cd ui/ && npm run build",
+		"lint": "eslint .",
+		"fix": "eslint --fix ."
+	},
+	"nodemonConfig": {
+		"ignore": [
+			"ui/build/*"
+		],
+		"env": {
+			"NODE_OPTIONS": "--experimental-worker"
+		}
+	},
+	"dependencies": {
+		"body-parser": "^1.19.0",
+		"cookie-parser": "~1.4.4",
+		"cors": "^2.8.5",
+		"debug": "~2.6.9",
+		"express": "~4.16.1",
+		"http-errors": "~1.6.3",
+		"is-url": "^1.2.4",
+		"mongoose": "^5.11.19",
+		"morgan": "~1.9.1",
+		"nodegit": "^0.27.0",
+		"nodemon": "^2.0.7",
+		"simple-git": "^2.36.0"
+	},
+	"devDependencies": {
+		"eslint": "^7.21.0",
+		"eslint-plugin-react": "^7.22.0",
+		"typescript": "^4.2.3",
+		"typescript-eslint": "0.0.1-alpha.0"
+	}
+}
