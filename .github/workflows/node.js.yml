@@ -27,8 +27,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Make sure UI builds correctly
       working-directory: ./ui
-      run: npm ci
-      run: npm run build
+      run: npm ci && npm run build
     - name: Run linter
-      run: npm ci
-      run: npm run lint
+      run: npm ci && npm run lint
