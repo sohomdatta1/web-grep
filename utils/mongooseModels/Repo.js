@@ -1,11 +1,28 @@
 const mongoose = require( 'mongoose' );
+const isUrl = require( 'is-url' )
 const Schema = mongoose.Schema;
 const RepoSchema = new Schema( {
-  name: String,
-  url: String,
-  blurb: String,
+  name: {
+    type: String,
+    required: true
+  },
+  url: {
+    type: String,
+    required: () => {
+      return isUrl( this.url )
+    }
+  },
+  blurb: { type: String, default: '' },
+  src: String,
   reIndexInterval: Number,
+  lastUpdatedOn: { type: Number, default: Date.now() },
+  status: { type: String, enum: [ 'ToBeCreated', 'ToBeIndexed', 'Healthy', 'Error' ] },
+  statusMessage: { type: Object }
 } );
+
+RepoModel.pre('updateOne', async () => {
+  this.set({ lastUpdatedOn: new Date() });
+});
 
 const RepoModel = new mongoose.model( 'Repo', RepoSchema );
 

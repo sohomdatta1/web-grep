@@ -34,6 +34,9 @@ router.post( '/add_repo', function ( req, res ) {
       res.json( { status: false, statusMessage: 'Failed', error: err } );
       return;
     }
+
+    gitWorker.postMessage( req.body.name );
+
     res.json( {
       status: true,
       statusMessage: 'Success',
@@ -53,7 +56,9 @@ router.get( '/config', function ( req, res ) {
     let responseConfig = docs.map( ( x ) => ( {
       name: x.name,
       url: x.url,
+      blurb: x.blurb,
       reIndexInterval: x.reIndexInterval,
+      lastUpdatedOn: x.lastUpdatedOn
     } ) );
 
     console.log( err, responseConfig );
