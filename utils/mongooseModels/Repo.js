@@ -1,29 +1,25 @@
-const mongoose = require( 'mongoose' );
-const isUrl = require( 'is-url' )
-const Schema = mongoose.Schema;
-const RepoSchema = new Schema( {
+const mongoose = require('mongoose')
+const isUrl = require('is-url')
+const Schema = mongoose.Schema
+const RepoSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   url: {
     type: String,
     required: () => {
-      return isUrl( this.url )
+      return isUrl(this.url)
     }
   },
   blurb: { type: String, default: '' },
   src: String,
-  reIndexInterval: Number,
-  lastUpdatedOn: { type: Number, default: Date.now() },
-  status: { type: String, enum: [ 'ToBeCreated', 'ToBeIndexed', 'Healthy', 'Error' ] },
+  updateInterval: Number,
+  status: { type: String, enum: ['Cloned', 'Error'] },
   statusMessage: { type: Object }
-} );
+})
 
-RepoModel.pre('updateOne', async () => {
-  this.set({ lastUpdatedOn: new Date() });
-});
+const RepoModel = new mongoose.model('Repo', RepoSchema)
 
-const RepoModel = new mongoose.model( 'Repo', RepoSchema );
-
-module.exports = RepoModel;
+module.exports = RepoModel

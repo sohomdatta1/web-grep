@@ -1,3 +1,3 @@
-export default function CodeBrowser() {
-	return <div></div>;
+export default function CodeBrowser () {
+  return <div />
 }

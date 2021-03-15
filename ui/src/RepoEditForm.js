@@ -1,5 +1,4 @@
 import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
@@ -24,9 +23,9 @@ export default function AddRepository (props) {
   const classes = useStyles()
 
   const [formData, setFormData] = useState({
-    name: '',
-    url: '',
-    blurb: '',
+    name: props.repo.name,
+    url: props.repo.url,
+    blurb: props.repo.blurb,
     reIndexInterval: 14400
   })
 
@@ -38,8 +37,8 @@ export default function AddRepository (props) {
     e.preventDefault()
     setSubmitted(true)
 
-    fetch('/api/add_repo', {
-      method: 'POST',
+    fetch('/api/edit_repo', {
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
     })
@@ -65,10 +64,8 @@ export default function AddRepository (props) {
   }
 
   return (
-    <Paper
+    <Grid
       component='form'
-      elevation={0}
-      variant="outlined"
       className={classes.formContainer}
       onSubmit={handleSubmit}
     >
@@ -144,7 +141,7 @@ export default function AddRepository (props) {
           variant='outlined'
           disabled={submitted}
         >
-          Request indexing
+          Save changes
         </Button>&nbsp;&nbsp;
         <Button
           size='large'
@@ -155,6 +152,6 @@ export default function AddRepository (props) {
           Cancel
         </Button>
       </Grid>
-    </Paper>
+    </Grid>
   )
 }
