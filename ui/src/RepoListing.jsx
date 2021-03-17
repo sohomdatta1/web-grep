@@ -32,21 +32,20 @@ export default function RepoListing(props) {
     useEffect(() => {
         Prism.highlightAll();
         setResponse( '' );
-        setLoadEditingForm( false );
         setOpen( false );
       }, [loadEditingForm, props.repo]);
 
     const handleClickOpen = () => {
-    setOpen(true);
+        setOpen(true);
     };
 
     const handleClose = () => {
-    setOpen(false);
+        setOpen(false);
     };
 
     const deleteRepo = () => {
         setOpen( false );
-        fetch('/api/remove_repo', {
+        fetch('/api/repos/remove_repo', {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name: props.repo.name })

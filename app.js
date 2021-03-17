@@ -3,9 +3,11 @@ const path = require('path')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost/web-grep', { useNewUrlParser: true, useUnifiedTopology: true })
 
 const indexRouter = require('./routes/index')
-const apiRouter = require('./routes/api')
+const repoRouter = require('./routes/apiRoutes/repoRoutes')
 
 const app = express()
 
@@ -17,7 +19,7 @@ app.use(express.json())
 app.use(express.static(path.join(__dirname, 'ui/build')))
 app.use(cors())
 
-app.use('/api', apiRouter)
+app.use('/api/repos', repoRouter)
 app.use('/*', indexRouter)
 
 module.exports = app

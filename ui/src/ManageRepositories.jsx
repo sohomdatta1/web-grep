@@ -24,7 +24,7 @@ export default function ManageRepositories() {
     const classes = useStyle();
     useEffect ( () => {
         async function fetchData() {
-            const response = await fetch( '/api/list_repos', { headers: { 'Accept': 'application/json' } } )
+            const response = await fetch( '/api/repos/list_repos', { headers: { 'Accept': 'application/json' } } )
             const fetchedRepoList = await response.json()
             setLoading( false );
             setTrigger( false );

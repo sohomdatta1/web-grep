@@ -9,7 +9,7 @@
 		"start:prod": "cd ui/ && npm run build && cd - && node ./bin/www",
 		"start:ui": "cd ui/ && npm run start",
 		"build": "cd ui/ && npm run build",
-		"lint": "eslint .",
+		"lint": "eslint \"**/*.{js,jsx}\" --ignore-pattern node_modules/",
 		"fix": "eslint --fix ."
 	},
 	"nodemonConfig": {

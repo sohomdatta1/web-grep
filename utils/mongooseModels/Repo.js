@@ -16,8 +16,10 @@ const RepoSchema = new Schema({
   blurb: { type: String, default: '' },
   src: String,
   updateInterval: Number,
-  status: { type: String, enum: ['Cloned', 'Error'] },
-  statusMessage: { type: Object }
+  status: { type: String, enum: ['ToBeCreated', 'Cloned', 'Error'] },
+  statusMessage: { type: Object },
+  pullStatus: { type: Schema.Types.ObjectId, ref: 'Pull' }
+
 })
 
 const RepoModel = new mongoose.model('Repo', RepoSchema)

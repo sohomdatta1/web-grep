@@ -1,4 +1,5 @@
 import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
@@ -23,10 +24,10 @@ export default function AddRepository (props) {
   const classes = useStyles()
 
   const [formData, setFormData] = useState({
-    name: props.repo.name,
-    url: props.repo.url,
-    blurb: props.repo.blurb,
-    reIndexInterval: 14400
+    name: '',
+    url: '',
+    blurb: '',
+    updateInterval: 14400
   })
 
   const [submitted, setSubmitted] = useState(false)
@@ -37,8 +38,8 @@ export default function AddRepository (props) {
     e.preventDefault()
     setSubmitted(true)
 
-    fetch('/api/edit_repo', {
-      method: 'PUT',
+    fetch('/api/repos/add_repo', {
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
     })
@@ -49,7 +50,7 @@ export default function AddRepository (props) {
           setResponse(response.message)
           setSubmitted( false )
         } else {
-          setResponse(response.error)
+          setResponse(JSON.stringify(response.error))
           setIsError(true)
           setSubmitted(false)
         }
@@ -64,8 +65,10 @@ export default function AddRepository (props) {
   }
 
   return (
-    <Grid
+    <Paper
       component='form'
+      elevation={0}
+      variant="outlined"
       className={classes.formContainer}
       onSubmit={handleSubmit}
     >
@@ -120,14 +123,14 @@ export default function AddRepository (props) {
       </Grid>
       <Grid item xs={12}>
         <TextField
-          label='Re index interval (defaults to 4 hours)'
+          label='Update interval (defaults to 4 hours)'
           fullWidth
           variant='filled'
           className={classes.formElem}
-          value={String(formData.reIndexInterval)}
+          value={String(formData.updateInterval)}
           onChange={(e) =>
             updateValue(
-              'reIndexInterval',
+              'updateInterval',
               parseInt(e.target.value)
             )}
           disabled={submitted}
@@ -141,7 +144,7 @@ export default function AddRepository (props) {
           variant='outlined'
           disabled={submitted}
         >
-          Save changes
+          Request indexing
         </Button>&nbsp;&nbsp;
         <Button
           size='large'
@@ -152,6 +155,6 @@ export default function AddRepository (props) {
           Cancel
         </Button>
       </Grid>
-    </Grid>
+    </Paper>
   )
 }
